@@ -6,6 +6,14 @@ abstract class HomeState extends Equatable {
 }
 
 class HomeLoadingState extends HomeState {
+ const HomeLoadingState();
+
+  @override
+  List<Object> get props => [];
+}
+class HomeErrorState extends HomeState {
+  HomeErrorState(Exception l);
+
   @override
   List<Object> get props => [];
 }

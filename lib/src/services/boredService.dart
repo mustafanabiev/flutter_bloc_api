@@ -43,16 +43,13 @@ class BoredActivity {
 }
 
 class BoredService {
-  Future<List<BoredActivity>> getBoredActivity() async {
+  // Future<List<BoredActivity>> getBoredActivity() async {
+  Future<Either<Exception, List<BoredActivity>>> getBoredActivity() async {
     final response = await get(
-        Uri.parse('https://62626d89d5bd12ff1e7ce96a.mockapi.io/dataBase'));
+        Uri.parse('https://629ddf6cc6ef9335c0a8ce7c.mockapi.io/users'));
     final activity = boredActivityFromJson(response.body);
-    log(response.body);
-    return activity;
+    // log(response.body);
+    // return activity;
+    return Right(activity);
   }
 }
-
-
-abstract class Failure {}
-
-class ServerFailure extends Failure {}

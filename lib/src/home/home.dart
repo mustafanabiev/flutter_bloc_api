@@ -1,9 +1,9 @@
-import 'dart:developer';
-
-import 'package:bloc_api/home/bloc/home_bloc.dart';
-import 'package:bloc_api/services/boredService.dart';
+import 'package:bloc_api/src/services/boredService.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../locator.dart';
+import 'bloc/home_bloc.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -12,7 +12,8 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => HomeBloc(
-        RepositoryProvider.of<BoredService>(context),
+        // RepositoryProvider.of<BoredService>(context),
+        sl<BoredService>(),
       )..add(LoadApiEvent()),
       child: Scaffold(
         appBar: AppBar(
@@ -20,6 +21,11 @@ class HomePage extends StatelessWidget {
         ),
         body: BlocBuilder<HomeBloc, HomeState>(
           builder: (context, state) {
+            if (state is HomeErrorState) {
+              return const Center(
+                child: Text('Error'),
+              );
+            }
             if (state is HomeLoadingState) {
               return const Center(
                 child: CircularProgressIndicator(),

@@ -1,10 +1,8 @@
-import 'package:bloc_api/services/boredService.dart';
+import 'package:bloc_api/src/services/boredService.dart';
 import 'package:get_it/get_it.dart';
 
-import 'home/bloc/home_bloc.dart';
+final sl = GetIt.I;
 
-final s1 = GetIt.instance;
-
-void setup() {
-  s1.registerLazySingleton<BoredService>(() => BoredService());
+void setUp() {
+  sl.registerLazySingleton<BoredService>(() => BoredService());
 }
